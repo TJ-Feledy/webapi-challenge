@@ -26,13 +26,23 @@ Demonstrate your understanding of this Sprint's concepts by answering the follow
 
 - [ ] Mention two parts of Express that you learned about this week.
 
+      -  Express middleware and Express router.
+
 - [ ] Describe Middleware?
+
+      -  Middleware is used to make changes to the request and response objects, and also uses the next() argument to move on to the next function.
 
 - [ ] Describe a Resource?
 
+      -  A resource is the specific information returned from the database. 
+
 - [ ] What can the API return to help clients know if a request was successful?
 
+      -  A Response, usually containing a status code and an object.
+
 - [ ] How can we partition our application into sub-applications?
+
+      - By using express.Router() in a module and then exporting it for use within the main application.
 
 ## Project Setup
 
