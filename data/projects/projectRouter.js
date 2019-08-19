@@ -26,6 +26,38 @@ router.get('/', (req, res) => {
     })
 })
 
+router.get('/:id', validateProjectId, (req, res) => {
+  res.status(200).json(req.project)
+})
+
+router.delete('/:id', validateProjectId, (req, res) => {
+  const {id} = req.params
+
+  Projects.remove(id)
+    .then(project => {
+      if (project === 0) {
+        res.status(404).json({ message: 'Project ID is invalid.' })
+      }else {
+        res.status(200).json(project)
+      }
+    })
+    .catch(err => {
+      console.log(err)
+      res.status(500).json({ errorMessage: 'Could not remove the project.' })
+    })
+})
+
+router.put('/:id', validateProjectId, validateProject, (req, res) => {
+  Projects.update(req.params.id, req.body)
+    .then(project => {
+      res.status(200).json(project)
+    })
+    .catch(err => {
+      console.log(err)
+      res.status(500).json({ errorMessage: 'Could not update the project.' })
+    })
+})
+
 // -------Custom Middleware------
 
 function validateProjectId(req, res, next) {
