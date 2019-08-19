@@ -15,7 +15,16 @@ router.post('/', validateProject, (req, res) => {
     })
 })
 
-
+router.get('/', (req, res) => {
+  Projects.get()
+    .then(projects => {
+      res.status(200).json(projects)
+    })
+    .catch(err => {
+      console.log(err)
+      res.status(500).json({ errorMessage: 'Error getting projects' })
+    })
+})
 
 // -------Custom Middleware------
 
