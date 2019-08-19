@@ -1,12 +1,13 @@
 const express = require('express')
 
 const projectRouter = require('./data/projects/projectRouter.js')
+const actionRouter = require('./data/actions/actionRouter.js')
 
 const server = express()
 
 server.use(express.json())
 
-server.use('/api/projects', projectRouter)
+server.use('/api/projects', projectRouter, actionRouter)
 
 server.get('/', (req, res) => {
   res.send(`<h2>This is the webapi sprint challenge!</h2>`)

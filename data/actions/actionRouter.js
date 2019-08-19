@@ -17,11 +17,11 @@ router.post('/:id/actions', validateProjectId, validateAction, (req, res) => {
     })
 })
 
-router.get('/:id', validateActionId, (req, res) => {
+router.get('/actions/:id', validateActionId, (req, res) => {
   res.status(200).json(req.action)
 })
 
-router.delete('/:id', validateActionId, (req, res) => {
+router.delete('/actions/:id', validateActionId, (req, res) => {
   const { id } = req.params
 
   Actions.remove(id)
@@ -38,7 +38,7 @@ router.delete('/:id', validateActionId, (req, res) => {
     })
 })
 
-router.put('/:id', validateActionId, validateAction, (req, res) => {
+router.put('/actions/:id', validateActionId, validateAction, (req, res) => {
   Actions.update(req.params.id, req.body)
     .then(action => {
       res.status(200).json(action)
@@ -91,7 +91,7 @@ function validateAction(req, res, next) {
   if (Object.keys(req.body).length === 0) {
     res.status(400).json({ message: 'missing Action data' })
   }
-  else if (!req.body.name || req.body.name.split('').length === 0 || req.body.description.split('').length === 0) {
+  else if (!req.body.project_id || req.body.project_id === 0 || req.body.description.split('').length === 0) {
     res.status(400).json({ message: 'missing required project_id and/or description' })
   } else {
     next()
