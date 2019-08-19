@@ -17,17 +17,6 @@ router.post('/:id/actions', validateProjectId, validateAction, (req, res) => {
     })
 })
 
-router.get('/', (req, res) => {
-  Actions.get()
-    .then(actions => {
-      res.status(200).json(actions)
-    })
-    .catch(err => {
-      console.log(err)
-      res.status(500).json({ errorMessage: 'Error getting Actions' })
-    })
-})
-
 router.get('/:id', validateActionId, (req, res) => {
   res.status(200).json(req.action)
 })
