@@ -4,6 +4,17 @@ const Projects = require('../helpers/projectModel.js')
 
 const router = express.Router()
 
+router.post('/', validateProject, (req, res) => {
+  Projects.insert(req.body)
+    .then(project => {
+      res.status(200).json(project)
+    })
+    .catch(err => {
+      console.log(err)
+      res.status(500).json({ errorMessage: 'Error adding project' })
+    })
+})
+
 
 
 // -------Custom Middleware------
