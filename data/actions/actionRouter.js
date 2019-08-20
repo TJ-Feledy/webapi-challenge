@@ -1,6 +1,7 @@
 const express = require('express')
 
 const Actions = require('../helpers/actionModel.js')
+const Projects = require('../helpers/projectModel.js')
 
 const router = express.Router()
 
@@ -91,7 +92,7 @@ function validateAction(req, res, next) {
   if (Object.keys(req.body).length === 0) {
     res.status(400).json({ message: 'missing Action data' })
   }
-  else if (!req.body.project_id || req.body.project_id === 0 || req.body.description.split('').length === 0) {
+  else if (req.body.description.split('').length === 0) {
     res.status(400).json({ message: 'missing required project_id and/or description' })
   } else {
     next()
